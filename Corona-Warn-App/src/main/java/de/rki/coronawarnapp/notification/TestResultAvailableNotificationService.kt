@@ -8,15 +8,13 @@ import de.rki.coronawarnapp.coronatest.server.CoronaTestResult
 import de.rki.coronawarnapp.main.CWASettings
 import de.rki.coronawarnapp.ui.main.MainActivity
 import de.rki.coronawarnapp.util.device.ForegroundState
-import de.rki.coronawarnapp.util.di.AppContext
 import de.rki.coronawarnapp.util.notifications.setContentTextExpandable
 import kotlinx.coroutines.flow.first
 import timber.log.Timber
-import javax.inject.Inject
 import javax.inject.Provider
 
-abstract class TestResultAvailableNotificationService @Inject constructor(
-    @AppContext private val context: Context,
+abstract class TestResultAvailableNotificationService(
+    private val context: Context,
     private val foregroundState: ForegroundState,
     private val navDeepLinkBuilderProvider: Provider<NavDeepLinkBuilder>,
     private val notificationHelper: GeneralNotifications,
