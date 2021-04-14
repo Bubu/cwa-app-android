@@ -1,6 +1,7 @@
 package de.rki.coronawarnapp.notification
 
 import android.content.Context
+import androidx.annotation.IdRes
 import androidx.navigation.NavDeepLinkBuilder
 import de.rki.coronawarnapp.R
 import de.rki.coronawarnapp.coronatest.server.CoronaTestResult
@@ -14,12 +15,14 @@ import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Provider
 
-class TestResultAvailableNotificationService @Inject constructor(
+abstract class TestResultAvailableNotificationService @Inject constructor(
     @AppContext private val context: Context,
     private val foregroundState: ForegroundState,
     private val navDeepLinkBuilderProvider: Provider<NavDeepLinkBuilder>,
     private val notificationHelper: GeneralNotifications,
-    private val cwaSettings: CWASettings
+    private val cwaSettings: CWASettings,
+    private val notificationId: NotificationId,
+    @IdRes private val destination: Int
 ) {
 
     suspend fun showTestResultAvailableNotification(testResult: CoronaTestResult) {
@@ -49,13 +52,13 @@ class TestResultAvailableNotificationService @Inject constructor(
 
         Timber.i("Showing TestResultAvailable notification!")
         notificationHelper.sendNotification(
-            notificationId = NotificationConstants.TEST_RESULT_AVAILABLE_NOTIFICATION_ID,
+            notificationId = notificationId,
             notification = notification,
         )
     }
 
     fun cancelTestResultAvailableNotification() {
-        notificationHelper.cancelCurrentNotification(NotificationConstants.TEST_RESULT_AVAILABLE_NOTIFICATION_ID)
+        notificationHelper.cancelCurrentNotification(notificationId)
     }
 
     /**
@@ -67,5 +70,5 @@ class TestResultAvailableNotificationService @Inject constructor(
      * By letting the forwarding happen via the PendingResultFragment,
      * we have a common location to retrieve the test result.
      */
-    fun getNotificationDestination(testResult: CoronaTestResult): Int = R.id.submissionTestResultPendingFragment
+    fun getNotificationDestination(testResult: CoronaTestResult) = destination
 }

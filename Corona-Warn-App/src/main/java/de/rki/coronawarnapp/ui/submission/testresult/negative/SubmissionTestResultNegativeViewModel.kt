@@ -5,7 +5,7 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.NavDirections
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import de.rki.coronawarnapp.notification.TestResultAvailableNotificationService
+import de.rki.coronawarnapp.notification.PCRTestResultAvailableNotificationService
 import de.rki.coronawarnapp.submission.SubmissionRepository
 import de.rki.coronawarnapp.ui.submission.testresult.TestResultUIState
 import de.rki.coronawarnapp.util.coroutine.DispatcherProvider
@@ -18,7 +18,7 @@ import timber.log.Timber
 class SubmissionTestResultNegativeViewModel @AssistedInject constructor(
     dispatcherProvider: DispatcherProvider,
     private val submissionRepository: SubmissionRepository,
-    private val testResultAvailableNotificationService: TestResultAvailableNotificationService
+    private val testResultAvailableNotificationService: PCRTestResultAvailableNotificationService
 ) : CWAViewModel(dispatcherProvider = dispatcherProvider) {
 
     val routeToScreen = SingleLiveEvent<NavDirections?>()

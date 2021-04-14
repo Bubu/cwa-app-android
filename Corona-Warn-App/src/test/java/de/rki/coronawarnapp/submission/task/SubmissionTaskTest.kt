@@ -8,8 +8,8 @@ import de.rki.coronawarnapp.eventregistration.checkins.CheckIn
 import de.rki.coronawarnapp.eventregistration.checkins.CheckInRepository
 import de.rki.coronawarnapp.eventregistration.checkins.CheckInsTransformer
 import de.rki.coronawarnapp.exception.NoRegistrationTokenSetException
+import de.rki.coronawarnapp.notification.PCRTestResultAvailableNotificationService
 import de.rki.coronawarnapp.notification.ShareTestResultNotificationService
-import de.rki.coronawarnapp.notification.TestResultAvailableNotificationService
 import de.rki.coronawarnapp.playbook.Playbook
 import de.rki.coronawarnapp.server.protocols.external.exposurenotification.TemporaryExposureKeyExportOuterClass
 import de.rki.coronawarnapp.submission.SubmissionSettings
@@ -51,7 +51,7 @@ class SubmissionTaskTest : BaseTest() {
     @MockK lateinit var tekHistoryStorage: TEKHistoryStorage
     @MockK lateinit var submissionSettings: SubmissionSettings
     @MockK lateinit var shareTestResultNotificationService: ShareTestResultNotificationService
-    @MockK lateinit var testResultAvailableNotificationService: TestResultAvailableNotificationService
+    @MockK lateinit var testResultAvailableNotificationService: PCRTestResultAvailableNotificationService
     @MockK lateinit var autoSubmission: AutoSubmission
 
     @MockK lateinit var tekBatch: TEKHistoryStorage.TEKBatch

@@ -7,8 +7,8 @@ import de.rki.coronawarnapp.datadonation.analytics.modules.keysubmission.Analyti
 import de.rki.coronawarnapp.eventregistration.checkins.CheckInRepository
 import de.rki.coronawarnapp.eventregistration.checkins.CheckInsTransformer
 import de.rki.coronawarnapp.exception.NoRegistrationTokenSetException
+import de.rki.coronawarnapp.notification.PCRTestResultAvailableNotificationService
 import de.rki.coronawarnapp.notification.ShareTestResultNotificationService
-import de.rki.coronawarnapp.notification.TestResultAvailableNotificationService
 import de.rki.coronawarnapp.playbook.Playbook
 import de.rki.coronawarnapp.submission.SubmissionSettings
 import de.rki.coronawarnapp.submission.Symptoms
@@ -39,7 +39,7 @@ class SubmissionTask @Inject constructor(
     private val autoSubmission: AutoSubmission,
     private val timeStamper: TimeStamper,
     private val shareTestResultNotificationService: ShareTestResultNotificationService,
-    private val testResultAvailableNotificationService: TestResultAvailableNotificationService,
+    private val testResultAvailableNotificationService: PCRTestResultAvailableNotificationService,
     private val checkInsRepository: CheckInRepository,
     private val checkInsTransformer: CheckInsTransformer,
     private val analyticsKeySubmissionCollector: AnalyticsKeySubmissionCollector,
