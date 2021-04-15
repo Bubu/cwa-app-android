@@ -1,5 +1,6 @@
 package de.rki.coronawarnapp.coronatest.type.pcr
 
+import androidx.annotation.VisibleForTesting
 import de.rki.coronawarnapp.exception.http.CwaServerError
 import de.rki.coronawarnapp.util.CWADebug
 import de.rki.coronawarnapp.util.DeviceUIState
@@ -24,7 +25,7 @@ fun PCRCoronaTest?.toSubmissionState(): SubmissionStatePCR {
         else -> NetworkRequestWrapper.RequestSuccessful(uiState)
     }
 
-    val eval = Evaluation(
+    val eval = generateEvaluation(
         deviceUiState = networkWrapper,
         isDeviceRegistered = registrationToken != null,
         hasTestResultBeenSeen = this.isViewed
@@ -44,8 +45,17 @@ fun PCRCoronaTest?.toSubmissionState(): SubmissionStatePCR {
     }
 }
 
-// TODO Refactor this to be easier to understand, probably remove the "withSuccess" logic.
-private data class Evaluation(
+@VisibleForTesting
+internal fun generateEvaluation(
+    deviceUiState: NetworkRequestWrapper<DeviceUIState, Throwable>,
+    isDeviceRegistered: Boolean,
+    hasTestResultBeenSeen: Boolean
+): Evaluation {
+    return Evaluation(deviceUiState, isDeviceRegistered, hasTestResultBeenSeen)
+}
+
+@VisibleForTesting
+internal data class Evaluation(
     val deviceUiState: NetworkRequestWrapper<DeviceUIState, Throwable>,
     val isDeviceRegistered: Boolean,
     val hasTestResultBeenSeen: Boolean
